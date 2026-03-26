@@ -14,7 +14,7 @@ const DEFAULT_SETTINGS: QRSettings = {
   dotsColor: '#000000',
   cornersColor: '#000000',
   backgroundColor: '#ffffff',
-  logoSize: 0.3,
+  logoSize: 0.2,
   errorCorrectionLevel: 'Q'
 };
 
@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <h1>QR Studio</h1>
+        <h1>QR Studio by MCMC</h1>
         <p>Simple, aesthetic, and verifiable QR code generator.</p>
       </header>
 

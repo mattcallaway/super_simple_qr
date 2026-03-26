@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import type { QRSettings } from '../types';
-import { Upload, Trash2 } from 'lucide-react';
+import { Upload, Trash2, AlertTriangle } from 'lucide-react';
+import { processLogoWithWhiteBackground } from '../utils/logoProcessor';
 
 interface ControlsProps {
   settings: QRSettings;
@@ -19,7 +20,12 @@ export const Controls: React.FC<ControlsProps> = ({ settings, setSettings }) => 
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        handleChange('logoUrl', event.target?.result as string);
+        processLogoWithWhiteBackground(event.target?.result as string).then(processedUrl => {
+          handleChange('logoUrl', processedUrl);
+        }).catch(err => {
+          console.error(err);
+          handleChange('logoUrl', event.target?.result as string);
+        });
         // Automatically bump error correction to High when logo is uploaded for better Scannability
         handleChange('errorCorrectionLevel', 'H');
       };
@@ -74,6 +80,11 @@ export const Controls: React.FC<ControlsProps> = ({ settings, setSettings }) => 
             <Upload size={18} /> Choose Logo
           </button>
           {settings.logoUrl && (
+        <div className="warning-box" style={{ padding: '8px', background: '#fff3cd', color: '#856404', borderRadius: '4px', fontSize: '13px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <AlertTriangle size={16} /> Max recommended logo size is 25%. Ensure your pattern remains visible.
+        </div>
+      )}
+      {settings.logoUrl && (
             <button className="btn btn-danger" onClick={removeLogo} title="Remove Logo">
               <Trash2 size={18} />
             </button>
@@ -87,7 +98,7 @@ export const Controls: React.FC<ControlsProps> = ({ settings, setSettings }) => 
           <input 
             type="range" 
             min="0.1" 
-            max="0.5" 
+            max="0.25" 
             step="0.05" 
             value={settings.logoSize} 
             onChange={(e) => handleChange('logoSize', parseFloat(e.target.value))}

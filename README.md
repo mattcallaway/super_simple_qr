@@ -1,4 +1,4 @@
-# Super Simple QR Studio
+# QR Studio by MCMC Studio
 
 A lightweight, aesthetically pleasing single-page web application for generating, visually customizing, and validating QR codes. Built with React and Vite.
 
@@ -15,8 +15,8 @@ Before you begin, ensure you have [Node.js](https://nodejs.org/) installed on yo
 ## Installation
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/mattcallaway/super_simple_qr.git
-   cd super_simple_qr
+   git clone https://github.com/mattcallaway/QR Studio by MCMC.git
+   cd QR Studio by MCMC
    ```
 2. **Install dependencies:**
    ```bash

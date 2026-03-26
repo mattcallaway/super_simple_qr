@@ -46,3 +46,28 @@ Open your browser and navigate to the localhost URL provided in your terminal (t
 - QR Engine: `qr-code-styling`
 - Validation Engine: `jsQR`
 - Icons: `lucide-react`
+
+
+## Advanced Customization & Safety Guide
+QR Studio by MCMC now includes powerful styling options. However, reliability is our top priority. The app includes **guardrails** and a **Contrast Checker** to ensure your QR code remains highly scannable.
+
+### Styling Options
+- **Module Shapes**: Choose from Square, Rounded, Dots, and more. 
+- **Corners**: Customize both the outer frame and the inner dot of the alignment corners.
+- **Colors & Gradients**: Fine-tune background and foreground colors. *Note: Linear gradients are supported but strictly experimental. Always perform a test scan.*
+
+### Validation & "Fix for me"
+Our verification system renders the actual finalized canvas and tests it under three conditions:
+1. **Raw Canvas Scan**: Ensures base mathematical readability.
+2. **Distant Scan (50% downscale)**: Ensures large details like logos don't obscure data at a distance.
+3. **Blurred Scan**: Ensures the contrast holds up under poor lighting or camera focus.
+
+If a setting causes any of these to fail, the UI will warn you. You can easily click **Fix for me** to automatically reset offending styles (like low-contrast colors or oversized logos) to safe defaults.
+
+### Logo & Brand Styling
+- **Logo Masks**: Automatically clip your logo to a Square, Rounded Square, or Circle.
+- **Auto-Padding**: Safely isolates your logo by clearing underlying modules and drawing a high-contrast white backing. This prevents accidental module corruption.
+- **Size Bounds**: Maximum logo size is strictly constrained to 25% of the QR width.
+
+### Exporting
+Use the **Export Resolution** selector to download crisp PNGs at 256px, 512px, 1024px, or 2048px maximum width.
